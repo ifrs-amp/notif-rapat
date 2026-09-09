@@ -1,4 +1,3 @@
-<!-- ===================== INDEX.HTML ===================== -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -187,7 +186,6 @@
   </div>
 
   <script>
-    // Fungsi untuk menangani submit form
     function submitForm(e) {
       e.preventDefault();
       
@@ -199,7 +197,6 @@
       const btn = document.getElementById('submitBtn');
       const statusDiv = document.getElementById('statusMessage');
       
-      // Validasi dasar
       if (!title || !date || !time || !participants) {
         statusDiv.className = 'error';
         statusDiv.textContent = '⚠️ Harap isi semua field wajib (Judul, Tanggal, Jam, Peserta).';
@@ -207,12 +204,10 @@
         return;
       }
       
-      // Matikan tombol sambil memproses
       btn.disabled = true;
       btn.innerHTML = '⏳ Menyimpan...';
       statusDiv.style.display = 'none';
       
-      // Panggil fungsi Apps Script
       google.script.run
         .withSuccessHandler(function(response) {
           btn.disabled = false;
@@ -221,7 +216,6 @@
             statusDiv.className = 'success';
             statusDiv.textContent = response.message;
             document.getElementById('meetingForm').reset();
-            // Scroll ke status
             statusDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
           } else {
             statusDiv.className = 'error';
@@ -239,7 +233,6 @@
         .addMeeting(title, date, time, participants, description);
     }
     
-    // Set default date ke hari ini (optional)
     document.addEventListener('DOMContentLoaded', function() {
       const today = new Date().toISOString().split('T')[0];
       document.getElementById('date').setAttribute('min', today);
