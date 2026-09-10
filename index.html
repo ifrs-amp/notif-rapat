@@ -6,100 +6,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Input Jadwal Rapat</title>
   <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f4f7f6;
-      margin: 0;
-      padding: 20px;
-      display: flex;
-      justify-content: center;
-    }
-    .container {
-      background-color: #ffffff;
-      width: 100%;
-      max-width: 500px;
-      padding: 25px;
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-    }
-    h2 {
-      margin-top: 0;
-      color: #333;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 20px;
-    }
-    .subtitle {
-      font-size: 13px;
-      color: #666;
-      margin-bottom: 20px;
-      border-left: 3px solid #4a86e8;
-      padding-left: 10px;
-    }
-    .form-group {
-      margin-bottom: 15px;
-    }
-    label {
-      display: block;
-      font-weight: 600;
-      margin-bottom: 5px;
-      color: #444;
-      font-size: 14px;
-    }
-    label span {
-      color: #e74c3c;
-    }
-    input[type="text"], 
-    input[type="date"], 
-    input[type="time"], 
-    input[type="email"], 
-    textarea {
-      width: 100%;
-      padding: 10px 12px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 14px;
-      box-sizing: border-box;
-      transition: border-color 0.3s;
-    }
-    input:focus, textarea:focus {
-      border-color: #4a86e8;
-      outline: none;
-    }
-    textarea {
-      resize: vertical;
-      height: 80px;
-    }
-    .btn-simpan {
-      width: 100%;
-      background-color: #4a86e8;
-      color: white;
-      border: none;
-      padding: 14px;
-      font-size: 16px;
-      font-weight: bold;
-      border-radius: 8px;
-      cursor: pointer;
-      margin-top: 10px;
-      transition: background-color 0.3s;
-    }
-    .btn-simpan:hover {
-      background-color: #3b6fc4;
-    }
-    .btn-simpan:disabled {
-      background-color: #9cbdf0;
-      cursor: not-allowed;
-    }
-    .footer {
-      margin-top: 15px;
-      text-align: center;
-      font-size: 12px;
-      color: #888;
-      background: #f9f9f9;
-      padding: 8px;
-      border-radius: 6px;
-    }
+    body { font-family: 'Segoe UI', sans-serif; background-color: #f4f7f6; margin: 0; padding: 20px; display: flex; justify-content: center; }
+    .container { background-color: #ffffff; width: 100%; max-width: 500px; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+    h2 { margin-top: 0; color: #333; font-size: 20px; }
+    .subtitle { font-size: 13px; color: #666; margin-bottom: 20px; border-left: 3px solid #4a86e8; padding-left: 10px; }
+    .form-group { margin-bottom: 15px; }
+    label { display: block; font-weight: 600; margin-bottom: 5px; color: #444; font-size: 14px; }
+    label span { color: #e74c3c; }
+    input, textarea { width: 100%; padding: 10px 12px; border: 1px solid #ccc; border-radius: 8px; font-size: 14px; box-sizing: border-box; }
+    input:focus, textarea:focus { border-color: #4a86e8; outline: none; }
+    textarea { resize: vertical; height: 80px; }
+    .btn-simpan { width: 100%; background-color: #4a86e8; color: white; border: none; padding: 14px; font-size: 16px; font-weight: bold; border-radius: 8px; cursor: pointer; margin-top: 10px; }
+    .btn-simpan:disabled { background-color: #9cbdf0; cursor: not-allowed; }
+    .footer { margin-top: 15px; text-align: center; font-size: 12px; color: #888; background: #f9f9f9; padding: 8px; border-radius: 6px; }
   </style>
 </head>
 <body>
@@ -113,46 +32,35 @@
         <label>Judul Rapat <span>*</span></label>
         <input type="text" id="judul" required placeholder="Contoh: Rapat Evaluasi Bulanan">
       </div>
-
       <div class="form-group">
         <label>Tanggal <span>*</span></label>
         <input type="date" id="tanggal" required>
       </div>
-
       <div class="form-group">
         <label>Jam <span>*</span></label>
         <input type="time" id="jam" required>
       </div>
-
       <div class="form-group">
         <label>Email Atasan <span>*</span></label>
         <input type="email" id="email" required placeholder="atasan@gmail.com">
-        <small style="color:#777; font-size:12px;">Pisahkan lebih dari 1 email dengan tanda koma ( , )</small>
       </div>
-
       <div class="form-group">
         <label>Deskripsi / Agenda</label>
-        <textarea id="deskripsi" placeholder="Tuliskan agenda rapat di sini..."></textarea>
+        <textarea id="deskripsi" placeholder="Tuliskan agenda rapat..."></textarea>
       </div>
-
       <button type="submit" id="btnSimpan" class="btn-simpan">Simpan Jadwal</button>
     </form>
-
-    <div class="footer">
-      ⏰ Scheduler aktif: Cek otomatis setiap pagi jam 07:00
-    </div>
+    <div class="footer">⏰ Scheduler aktif: Cek otomatis setiap pagi jam 07:00</div>
   </div>
 
   <script>
     function prosesSimpan(e) {
-      e.preventDefault(); // Mencegah form reload halaman
+      e.preventDefault(); // Tahan form agar tidak reload
 
-      // 1. Ubah tombol jadi status loading
       var tombol = document.getElementById("btnSimpan");
       tombol.innerHTML = "⏳ Menyimpan...";
       tombol.disabled = true;
 
-      // 2. Ambil semua data dari form
       var dataForm = {
         judul: document.getElementById("judul").value,
         tanggal: document.getElementById("tanggal").value,
@@ -161,29 +69,27 @@
         deskripsi: document.getElementById("deskripsi").value
       };
 
-      // 3. Kirim data ke Google Apps Script (Code.gs)
+      // Kirim ke server
       google.script.run
         .withSuccessHandler(function(response) {
-          // Jika berhasil
           if (response.success) {
             alert("✅ " + response.message);
-            document.getElementById("formRapat").reset(); // Kosongkan form
+            document.getElementById("formRapat").reset();
           } else {
-            alert("❌ Gagal menyimpan: " + response.message);
+            // Jika server menolak karena ada error (misal nama sheet salah)
+            alert("❌ GAGAL: " + response.message);
           }
-          // Kembalikan tombol ke normal
           tombol.innerHTML = "Simpan Jadwal";
           tombol.disabled = false;
         })
         .withFailureHandler(function(error) {
-          // Jika terjadi error koneksi / script crash
-          alert("❌ Terjadi kesalahan sistem: " + error.message);
+          // Jika koneksi terputus / script crash total
+          alert("❌ ERROR SISTEM: " + error.message);
           tombol.innerHTML = "Simpan Jadwal";
           tombol.disabled = false;
         })
-        .simpanJadwalKeSheet(dataForm); // Nama fungsi di Code.gs
+        .simpanJadwalKeSheet(dataForm);
     }
   </script>
-
 </body>
 </html>
